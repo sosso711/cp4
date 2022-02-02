@@ -20,13 +20,14 @@ model user {
 }
 
 model lists {
-  id             Int       @id @default(autoincrement())
-  createDate     DateTime
-  name           String
-  userId         Int
-  user           user      @relation(fields: [userId], references: [id])
-  validateId     Int
-  validateListId listItems @relation(fields: [validateId], references: [id])
+  id          Int        @id @default(autoincrement())
+  createDate  DateTime
+  name        String
+  userId      Int
+  user        user       @relation(fields: [userId], references: [id])
+  listItems   listItems? @relation(fields: [listItemsId], references: [id])
+  listItemsId Int?
+  Items       Items[]
 }
 
 model Items {
@@ -34,6 +35,8 @@ model Items {
   name       String
   validateId Int
   validate   listItems @relation(fields: [validateId], references: [id])
+  listsId    Int?
+  lists      lists?    @relation(fields: [listsId], references: [id])
 
 }
 
