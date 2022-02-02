@@ -4,6 +4,7 @@ import {
   deleteOneItem,
   validateItems,
 } from "../../../models/items";
+import base from "../../../middleware/commons";
 
 async function handlePatch({ query: { id }, body }, res) {
   const validationErrors = validateItems(body, true);
@@ -25,4 +26,4 @@ async function handleDelete({ query: { id } }, res) {
   else res.status(404).send();
 }
 
-export default get(handleGetOne).patch(handlePatch).delete(handleDelete);
+export default base().get(handleGetOne).patch(handlePatch).delete(handleDelete);

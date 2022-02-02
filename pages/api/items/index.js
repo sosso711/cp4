@@ -1,4 +1,5 @@
 import { validateItems, createItems, getItems } from "../../../models/items";
+import base from "../../../middleware/commons";
 
 const handleGet = async (req, res) => {
   res.send(await getItems());
@@ -13,4 +14,4 @@ async function handlePost(req, res) {
   res.status(201).send(newItem);
 }
 
-export default get(handleGet).post(handlePost);
+export default base().get(handleGet).post(handlePost);

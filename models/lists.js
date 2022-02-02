@@ -4,9 +4,12 @@ const Joi = require("joi");
 const validateList = (data, forUpdate = false) => {
   return Joi.object({
     name: Joi.string().presence(forUpdate ? "optional" : "required"),
-    createDate: Joi.date().presence(forUpdate ? "optional" : "required"),
-    listItemId: Joi.number.presence(forUpdate ? "optional" : "required"),
-    userId: Joi.number.presence(forUpdate ? "optional" : "required"),
+    // createDate: Joi.date(),
+    //   .format("YYYY-MM-DD")
+
+    //   .presence(forUpdate ? "optional" : "required"),
+    listItemId: Joi.number(),
+    userId: Joi.number().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -14,18 +17,13 @@ const ListToShow = {
   id: true,
   name: true,
   createDate: true,
-  listItemId: true,
   userId: true,
 };
 
-const getLists = async ({ name, createDate, userId, listItemId }) => {
+const getLists = async () => {
   return Promise.all([
     db.lists.findMany({
-      select: id,
-      name,
-      createDate,
-      listItemId,
-      userId,
+      select: ListToShow,
     }),
   ]);
 };
@@ -33,7 +31,6 @@ const getLists = async ({ name, createDate, userId, listItemId }) => {
 const getOneList = (id) => {
   return db.lists.findUnique({
     where: { id: parseInt(id, 10) },
-    select: ListToShow,
   });
 };
 
@@ -62,7 +59,7 @@ module.exports = {
   validateList,
   createList,
   getLists,
-  ListToShow,
+  //   ListToShow,
   getOneList,
   updateList,
   deleteOneList,

@@ -4,16 +4,18 @@ const Joi = require("joi");
 const validateItems = (data, forUpdate = false) => {
   return Joi.object({
     name: Joi.string().presence(forUpdate ? "optional" : "required"),
-    validate: Joi.boolean.presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
 
-const getItems = async ({ name, validate }) => {
+const itemToShow = {
+  id: true,
+  name: true,
+};
+
+const getItems = async () => {
   return Promise.all([
-    db.items.findMany({
-      select: id,
-      name,
-      validate,
+    db.Items.findMany({
+      select: itemToShow,
     }),
   ]);
 };
@@ -21,9 +23,6 @@ const getItems = async ({ name, validate }) => {
 const getOneItem = (id) => {
   return db.Items.findUnique({
     where: { id: parseInt(id, 10) },
-    select: id,
-    name,
-    validate,
   });
 };
 
@@ -33,11 +32,10 @@ const deleteOneItem = async (id) => {
   );
 };
 
-const createItems = async ({ name, validate }) => {
+const createItems = async ({ name }) => {
   return await db.Items.create({
     data: {
       name,
-      validate,
     },
   });
 };

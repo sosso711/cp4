@@ -15,10 +15,19 @@ export default function addList() {
             </div>
             <div className="flex justify-center ">
               <label className="m-10">ajouter</label>
-              <input type="text" className="h-7 m-10"></input>
+              <select className="h-7 m-10">
+                <option value="1">un test</option>
+              </select>
               <button type="button" className="m-10 bg-slate-300 w-1/6 h-">
                 Ajouter
               </button>
+            </div>
+            <div
+              className="flex f
+              "
+            >
+              {" "}
+              <button type="button">Valider la liste</button>
             </div>
           </form>
         </div>
