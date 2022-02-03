@@ -4,12 +4,9 @@ const Joi = require("joi");
 const validateList = (data, forUpdate = false) => {
   return Joi.object({
     name: Joi.string().presence(forUpdate ? "optional" : "required"),
-    // createDate: Joi.date(),
-    //   .format("YYYY-MM-DD")
-
-    //   .presence(forUpdate ? "optional" : "required"),
+    createDate: Joi.date().presence(forUpdate ? "optional" : "required"),
     listItemId: Joi.number(),
-    userId: Joi.number().presence("optional"),
+    userId: Joi.number(),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -59,7 +56,7 @@ module.exports = {
   validateList,
   createList,
   getLists,
-  //   ListToShow,
+  ListToShow,
   getOneList,
   updateList,
   deleteOneList,

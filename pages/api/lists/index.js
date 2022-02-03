@@ -10,6 +10,7 @@ async function handlePost(req, res) {
   if (validationError) return res.status(422).send(validationError);
   const newList = await createList({
     ...req.body,
+    userId: { connect: { id: 1 } },
   });
   res.status(201).send(newList);
 }

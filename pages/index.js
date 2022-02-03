@@ -23,12 +23,12 @@ export default function Home() {
                 <a className="text-center">Ma liste</a>
               </Link>
             </div>
-            <div className=" w-2/3 md:w-1/4 bg-white  p-10 m-10">
+            {/* <div className=" w-2/3 md:w-1/4 bg-white  p-10 m-10">
               {" "}
               <Link href="/myOldList">
                 <a className="text-center">Mes listes précédentes</a>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </Layout>
