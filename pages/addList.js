@@ -22,9 +22,6 @@ export default function addList() {
     setAdd([...add, newItem]);
   };
 
-  const validateItems = (e) => {
-    setAdd(e.target.value);
-  };
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
@@ -38,7 +35,7 @@ export default function addList() {
       })
       .then((res) => {
         setList(res.data);
-        router.push("/lists");
+        router.push(`/lists/${id}`);
       });
   };
 
@@ -100,7 +97,6 @@ export default function addList() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  // onClick={handleClick}
                   className="        p-2  m-10 bg-white w-3/5 h-10 rounded-xl mt-80 md:w-1/5"
                 >
                   Valider la liste

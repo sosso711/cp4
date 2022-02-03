@@ -29,6 +29,16 @@ const getLists = async () => {
 const getOneList = (id) => {
   return db.lists.findUnique({
     where: { id: parseInt(id, 10) },
+    include: {
+      listItems: {
+        where: {
+          listId: +id,
+        },
+        include: {
+          items: true,
+        },
+      },
+    },
   });
 };
 

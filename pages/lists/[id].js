@@ -1,24 +1,20 @@
 import axios from "axios";
-import { getClientBuildManifest } from "next/dist/client/route-loader";
-
 import { useState, useEffect } from "react";
-
 import Layout from "../../components/Layout";
 
 export default function oneList() {
-  const [itemId, setitemId] = useState("");
+  const [item, setItem] = useState([]);
   const [validate, setValidate] = useState(false);
-  const [listId, setListId] = useState("");
+  const [listName, setListName] = useState("");
 
   const getList = async (id) => {
-    await axios
-      .get("/api/listItem/")
-      .then(({ data: { validate, itemId, listId } }) => {
-        setValidate(validate);
-        setitemId(itemId);
-        setListId(listId);
+    await axios.get(`/api/lists/1`).then((res) => {
+      const listItem = res.data.listItems.flatMap((l) => {
+        return l.items;
       });
-    console.log(itemId);
+      setListName(res.data.name);
+      setItem(listItem);
+    });
   };
 
   useEffect(() => {
@@ -29,18 +25,19 @@ export default function oneList() {
     <div>
       <Layout>
         <div className="bg-gray-300 h-screen w-full">
-          <h1 className="text-center p-10 text-2xl"></h1>
+          <h1 className="text-center p-10 text-2xl">{listName}</h1>
+          <ul>
+            {" "}
+            {item.map((i) => {
+              return (
+                <li key={i.id} className="ml-10">
+                  {i.name}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </Layout>
     </div>
   );
 }
-
-// export async function getStaticProps(context) {
-//   const res = await axios.get(`/api/listItem/${id}`);
-//   const list = await res.json;
-//   return {
-//     props: {
-//       list,
-//     },
-//   };
