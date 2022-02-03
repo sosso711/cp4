@@ -8,15 +8,13 @@ export default function Header() {
       <div className="bg-secondary text-center m-15 text-2xl w-screen-auto flew flex-row justify-center">
         {" "}
         <Link href="/">
-          <a className="">
+          <a className="ml-15">
             {" "}
             <CgSun size={50} />
           </a>
         </Link>
         <h1 className="p-2"> Checklist de mes Vacances</h1>
-        <div className="pl-15 items-center">
-          <GiMountains size={50} />
-        </div>
+        <div className="pl-15 items-center"></div>
       </div>
     </div>
   );

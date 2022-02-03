@@ -35,7 +35,7 @@ export default function addList() {
       })
       .then((res) => {
         setList(res.data);
-        router.push(`/lists/${id}`);
+        router.push(`/lists/${res.data.id}`);
       });
   };
 

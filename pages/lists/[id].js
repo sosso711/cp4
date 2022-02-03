@@ -7,8 +7,9 @@ export default function oneList() {
   const [validate, setValidate] = useState(false);
   const [listName, setListName] = useState("");
 
-  const getList = async (id) => {
-    await axios.get(`/api/lists/1`).then((res) => {
+  const getList = async () => {
+   
+    await axios.get(`/api/lists/${id}`).then((res) => {
       const listItem = res.data.listItems.flatMap((l) => {
         return l.items;
       });
