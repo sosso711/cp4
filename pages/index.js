@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <Layout>
-        <div className="bg-secondary h-screen w-full">
+        <div className="bg-gray-300 h-screen w-full">
           <h1 className="text-center p-10 text-2xl">Tableau de bord</h1>
           <div className="md:flex justify-around ">
             <div className="w-2/3 md:w-1/4 bg-white  p-10 m-10">
@@ -19,16 +19,10 @@ export default function Home() {
             </div>
             <div className="w-2/3 md:w-1/4 bg-white  p-10 m-10">
               {" "}
-              <Link href="/myList">
+              <Link href="/lists">
                 <a className="text-center">Ma liste</a>
               </Link>
             </div>
-            {/* <div className=" w-2/3 md:w-1/4 bg-white  p-10 m-10">
-              {" "}
-              <Link href="/myOldList">
-                <a className="text-center">Mes listes précédentes</a>
-              </Link>
-            </div> */}
           </div>
         </div>
       </Layout>

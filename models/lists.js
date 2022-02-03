@@ -1,11 +1,12 @@
 const db = require("../db");
 const Joi = require("joi");
+import { createListItems } from "../models/listItems";
 
 const validateList = (data, forUpdate = false) => {
   return Joi.object({
     name: Joi.string().presence(forUpdate ? "optional" : "required"),
     createDate: Joi.date().presence(forUpdate ? "optional" : "required"),
-    listItemId: Joi.number(),
+    listItemId: Joi.array().items(Joi.number()),
     userId: Joi.number(),
   }).validate(data, { abortEarly: false }).error;
 };
@@ -38,14 +39,23 @@ const deleteOneList = async (id) => {
 };
 
 const createList = async ({ name, createDate, listItemId }) => {
-  return await db.lists.create({
+  const newList = await db.lists.create({
     data: {
       name,
-      createDate,
-      listItemId,
+      createDate: new Date(createDate),
     },
   });
+  const newListsItems = listItemId.map((id) => {
+    createListItems({
+      itemId: id,
+      listId: newList.id,
+      validate: false,
+    });
+  });
+  const createdItemList = await Promise.all(newListsItems);
+  return { ...newList, listItem: newListsItems };
 };
+
 const updateList = async (id, data) => {
   return db.lists
     .update({ where: { id: parseInt(id, 10) }, data })

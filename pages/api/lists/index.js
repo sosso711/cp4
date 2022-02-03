@@ -7,7 +7,9 @@ const handleGet = async (req, res) => {
 
 async function handlePost(req, res) {
   const validationError = validateList(req.body);
+  console.log(validationError);
   if (validationError) return res.status(422).send(validationError);
+
   const newList = await createList({
     ...req.body,
     userId: { connect: { id: 1 } },

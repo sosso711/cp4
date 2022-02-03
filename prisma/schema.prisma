@@ -33,6 +33,7 @@ model Items {
   id        Int         @id @default(autoincrement())
   name      String
   listItems listItems[]
+  validate  Boolean     @default(false)
 
 
 }
