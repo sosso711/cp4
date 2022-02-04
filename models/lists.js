@@ -31,9 +31,9 @@ const getOneList = (id) => {
     where: { id: parseInt(id, 10) },
     include: {
       listItems: {
-        where: {
-          listId: +id,
-        },
+        // where: {
+        //   listId: { id: parseInt(id, 10) },
+        // },
         include: {
           items: true,
         },

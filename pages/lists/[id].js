@@ -4,12 +4,11 @@ import Layout from "../../components/Layout";
 
 export default function oneList() {
   const [item, setItem] = useState([]);
-  const [validate, setValidate] = useState(false);
+
   const [listName, setListName] = useState("");
 
-  const getList = async () => {
-   
-    await axios.get(`/api/lists/${id}`).then((res) => {
+  const getList = async (id) => {
+    await axios.get(`/api/lists/18`).then((res) => {
       const listItem = res.data.listItems.flatMap((l) => {
         return l.items;
       });
@@ -26,12 +25,12 @@ export default function oneList() {
     <div>
       <Layout>
         <div className="bg-gray-300 h-screen w-full">
-          <h1 className="text-center p-10 text-2xl">{listName}</h1>
-          <ul>
+          <h1 className="text-center p-10 text-3xl">{listName}</h1>
+          <ul className="">
             {" "}
             {item.map((i) => {
               return (
-                <li key={i.id} className="ml-10">
+                <li key={i.id} className="m-3 flex justify-center">
                   {i.name}
                 </li>
               );

@@ -46,26 +46,29 @@ export default function addList() {
           <h1 className="text-center p-10 text-2xl">Ajouter une liste</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" flex flex-wrap md:justify-around">
-              <label className="m-10"> Date du voyage</label>
+              <label className="m-3 md:m-10"> Date du voyage</label>
               <input
                 type="date"
                 id="date"
-                className="h-7 m-10"
+                className="h-7 m-3 md:m-10"
                 {...register("createDate")}
               ></input>
-              <label className=" m-10">Nom de la destination</label>
-              <input
-                type="text"
-                id="name"
-                className="h-7 m-10 w-1/4 p-3"
-                {...register("name")}
-              ></input>
+              <div className="flex-wrap">
+                <label className="m-3  md:m-10">Destination</label>
+                <input
+                  type="text"
+                  id="name"
+                  className="h-7 m-10 w-1/3 p-3"
+                  {...register("name")}
+                ></input>
+              </div>
             </div>
-            <div className="flex justify-center ">
-              <label className="m-10">Ajouter items</label>
-
+            <div
+              className="flex flex-row justify-center m-4
+             "
+            >
               <select
-                className="h-7 m-10 w-1/3 bg-white"
+                className="h-7 w-1/3 bg-white "
                 onChange={(e) => {
                   setAdd(e.target.value);
                   console.log(e.target.value);
@@ -80,18 +83,25 @@ export default function addList() {
                   );
                 })}{" "}
               </select>
-              <ul>
-                {add.map(({ id, name }) => {
-                  return <li key={id}>{name}</li>;
-                })}
-              </ul>
+
               <button
                 type="button"
-                className="m-10 bg-white w-1/6 rounded-lg"
+                className=" bg-white w-2/5 rounded-lg ml-4   "
                 onClick={handleSubmit(handleClick)}
               >
                 Ajouter
               </button>
+            </div>
+            <div>
+              <ul>
+                {add.map(({ id, name }) => {
+                  return (
+                    <li key={id} className="text-xl text-center m-2">
+                      {name}{" "}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
             <div>
               <div className="flex justify-center">
