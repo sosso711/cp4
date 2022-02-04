@@ -12,7 +12,6 @@ export default function myList() {
   useEffect(() => {
     axios.get("/api/lists").then((res) => {
       setLists(...res.data);
-      console.log(...lists);
     });
   }, []);
 
@@ -27,7 +26,10 @@ export default function myList() {
             {lists.map(({ id, name }) => {
               return (
                 <li key={id} className="text-xl pl-10 flex justify-center">
-                  {name}
+                  <a href={`lists/${id}`} passHref>
+                    {" "}
+                    {name} {/* <a>voir</a> */}
+                  </a>
                 </li>
               );
             })}

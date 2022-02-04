@@ -8,7 +8,7 @@ export default function oneList() {
   const [listName, setListName] = useState("");
 
   const getList = async (id) => {
-    await axios.get(`/api/lists/18`).then((res) => {
+    await axios.get(`/api/lists/${id}`).then((res) => {
       const listItem = res.data.listItems.flatMap((l) => {
         return l.items;
       });
